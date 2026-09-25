@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papa Pizza Delivery — Jacutinga, MG</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ TOASTS ============ -->
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">🍕</div>
+      <div class="brand-text">
+        <span class="brand-name">Papa Pizza</span>
+        <span class="brand-sub">Delivery · Jacutinga, MG</span>
+      </div>
+    </div>
+
+    <div class="header-status" id="statusPill">
+      <span class="status-dot"></span>
+      <span id="statusLabel">Verificando horário…</span>
+    </div>
+
+    <div class="header-actions">
+      <div class="mode-switch" id="modeSwitch" role="tablist" aria-label="Forma de recebimento">
+        <button class="mode-btn is-active" data-mode="delivery" role="tab" aria-selected="true">Entrega em Jacutinga</button>
+        <button class="mode-btn" data-mode="pickup" role="tab" aria-selected="false">Retirar no balcão</button>
+      </div>
+
+      <button class="icon-btn admin-entry" id="adminEntryBtn" title="Área Admin" aria-label="Acesso à área administrativa">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 2l7 3.5v6c0 5-3.2 8.4-7 10.5-3.8-2.1-7-5.5-7-10.5v-6L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <span>Admin</span>
+      </button>
+
+      <button class="cart-btn" id="cartBtn" aria-label="Abrir carrinho">
+        <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M3 4h2l1.4 11.2A2 2 0 0 0 8.4 17h8.2a2 2 0 0 0 2-1.7L20 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CLIENT VIEW ============ -->
+<main id="clientView">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-kicker">Massa de fermentação lenta · forno a lenha</p>
+        <h1>A pizza que faz Jacutinga<br>parar pra comer.</h1>
+        <p class="hero-lede">Do forno pra sua casa em minutos. Escolha o sabor, monte do seu jeito e acompanhe o pedido até a porta.</p>
+        <div class="hero-actions">
+          <a href="#cardapio" class="btn btn-primary">Ver cardápio</a>
+          <a href="#contato" class="btn btn-ghost">Como funciona</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>18h–23h30</strong><span>Terça a domingo</span></div>
+          <div><strong>~40 min</strong><span>Tempo médio de entrega</span></div>
+          <div><strong>4.9 ★</strong><span>Avaliação dos clientes</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-banner" id="promoBanner">
+          <span class="promo-tag">Oferta da casa</span>
+          <p class="promo-title">Toda terça, borda recheada sem custo extra</p>
+          <p class="promo-sub">Válido para pizzas grandes, sabor à sua escolha.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953b?q=80&w=900&auto=format&fit=crop" alt="Pizza artesanal recém-saída do forno" class="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-section" id="cardapio">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Cardápio</p>
+        <h2>Escolha o que vai pro forno hoje</h2>
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter-chip is-active" data-filter="todas">Todas</button>
+        <button class="filter-chip" data-filter="salgadas">Salgadas</button>
+        <button class="filter-chip" data-filter="doces">Doces</button>
+        <button class="filter-chip" data-filter="bebidas">Bebidas</button>
+        <button class="filter-chip" data-filter="promocionais">Promocionais</button>
+      </div>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- pizza cards injected by app.js -->
+    </div>
+  </section>
+
+  <!-- SOBRE / CONTATO -->
+  <section class="about-section" id="contato">
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Onde estamos</h3>
+        <p>Centro — Jacutinga, MG<br>CEP 37590-000</p>
+        <p class="muted">Entrega local em toda a região central e bairros próximos. Também aceitamos retirada no balcão.</p>
+      </div>
+      <div class="about-card">
+        <h3>Horário</h3>
+        <p>Terça a domingo<br>18h às 23h30</p>
+        <p class="muted">Segunda-feira é dia de forno apagado — voltamos com tudo na terça.</p>
+      </div>
+      <div class="about-card">
+        <h3>Fale com a gente</h3>
+        <p>Atendimento direto pelo WhatsApp Business.</p>
+        <a class="whatsapp-link" id="whatsappContactBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.5 3.6 1.4 5.1L2 22l5.13-1.5a9.9 9.9 0 0 0 4.9 1.3h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z"/></svg>
+          Chamar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <div class="brand-mark small">🍕</div>
+        <span class="brand-name">Papa Pizza</span>
+      </div>
+      <p>Centro, Jacutinga - MG · CEP 37590-000 · Terça a domingo, 18h–23h30</p>
+      <p class="muted">© <span id="footerYear"></span> Papa Pizza Delivery. Feito com carinho e queijo de sobra.</p>
+    </div>
+  </footer>
+</main>
+
+<!-- ============ ADMIN VIEW ============ -->
+<main id="adminView" hidden>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="brand">
+        <div class="brand-mark small">🍕</div>
+        <div class="brand-text">
+          <span class="brand-name">Papa Pizza</span>
+          <span class="brand-sub">Painel Admin</span>
+        </div>
+      </div>
+      <nav class="admin-nav" id="adminNav">
+        <button class="admin-nav-btn is-active" data-panel="dashboard">Dashboard</button>
+        <button class="admin-nav-btn" data-panel="cardapio-admin">Cardápio</button>
+        <button class="admin-nav-btn" data-panel="pedidos-admin">Pedidos</button>
+      </nav>
+      <button class="btn btn-ghost admin-exit" id="adminExitBtn">← Voltar à loja</button>
+    </aside>
+
+    <section class="admin-content">
+
+      <!-- DASHBOARD -->
+      <div class="admin-panel is-active" id="panel-dashboard">
+        <h2>Resumo do dia</h2>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <span class="stat-label">Vendas hoje</span>
+            <span class="stat-value" id="statSales">R$ 0,00</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Pedidos hoje</span>
+            <span class="stat-value" id="statOrders">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Ticket médio</span>
+            <span class="stat-value" id="statAvg">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h3>Pizzas mais vendidas</h3>
+          <ol class="rank-list" id="rankList"></ol>
+        </div>
+      </div>
+
+      <!-- CARDAPIO ADMIN -->
+      <div class="admin-panel" id="panel-cardapio-admin">
+        <h2>Cardápio</h2>
+        <div class="admin-card">
+          <h3>Cadastrar nova pizza</h3>
+          <form id="pizzaForm" class="pizza-form">
+            <div class="form-row">
+              <label>Nome da pizza
+                <input type="text" name="nome" required placeholder="Ex: Pizza Portuguesa">
+              </label>
+              <label>Categoria
+                <select name="categoria" required>
+                  <option value="salgadas">Salgada</option>
+                  <option value="doces">Doce</option>
+                  <option value="bebidas">Bebida</option>
+                  <option value="promocionais">Promocional</option>
+                </select>
+              </label>
+            </div>
+            <label>Ingredientes
+              <input type="text" name="ingredientes" required placeholder="Ex: Molho, muçarela, presunto, ovos, cebola">
+            </label>
+            <div class="form-row">
+              <label>Preço Brotinho (R$)
+                <input type="number" step="0.01" min="0" name="precoBrotinho" required placeholder="39.90">
+              </label>
+              <label>Preço Grande (R$)
+                <input type="number" step="0.01" min="0" name="precoGrande" required placeholder="59.90">
+              </label>
+            </div>
+            <label>URL da imagem
+              <input type="url" name="imagem" required placeholder="https://images.unsplash.com/...">
+            </label>
+            <div class="form-row">
+              <label>Status
+                <select name="status">
+                  <option value="ativo">Ativo (visível na loja)</option>
+                  <option value="inativo">Inativo (oculto)</option>
+                </select>
+              </label>
+              <label>Tag de destaque (opcional)
+                <input type="text" name="tag" placeholder="Ex: Mais pedida">
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar e publicar no cardápio</button>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <h3>Pizzas cadastradas</h3>
+          <div class="table-wrap">
+            <table class="admin-table" id="menuTable">
+              <thead>
+                <tr><th>Nome</th><th>Categoria</th><th>Brotinho</th><th>Grande</th><th>Status</th><th></th></tr>
+              </thead>
+              <tbody id="menuTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PEDIDOS ADMIN -->
+      <div class="admin-panel" id="panel-pedidos-admin">
+        <h2>Pedidos recebidos</h2>
+        <div class="admin-card">
+          <div class="table-wrap">
+            <table class="admin-table" id="ordersTable">
+              <thead>
+                <tr><th>Pedido</th><th>Cliente</th><th>Itens</th><th>Total</th><th>Status</th><th>Atualizar</th></tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+          <p class="muted empty-orders" id="emptyOrders">Nenhum pedido recebido ainda. Assim que um cliente finalizar uma compra, ele aparece aqui.</p>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</main>
+
+<!-- ============ CUSTOMIZATION MODAL ============ -->
+<div class="modal-overlay" id="customizeOverlay">
+  <div class="modal customize-modal" role="dialog" aria-modal="true" aria-labelledby="customizeTitle">
+    <button class="modal-close" id="closeCustomize" aria-label="Fechar">✕</button>
+    <img id="customizeImg" src="" alt="" class="customize-img">
+    <div class="customize-body">
+      <h3 id="customizeTitle"></h3>
+      <p class="muted" id="customizeIngredients"></p>
+
+      <div class="option-group" id="sizeGroup">
+        <span class="option-label">Tamanho</span>
+        <div class="option-chips" id="sizeChips"></div>
+      </div>
+
+      <div class="option-group" id="crustGroup">
+        <span class="option-label">Borda recheada</span>
+        <div class="option-chips" id="crustChips">
+          <button class="chip" data-crust="Sem borda" data-price="0">Sem borda</button>
+          <button class="chip" data-crust="Catupiry" data-price="8">Catupiry <small>+R$ 8</small></button>
+          <button class="chip" data-crust="Cheddar" data-price="8">Cheddar <small>+R$ 8</small></button>
+        </div>
+      </div>
+
+      <label class="option-group">
+        <span class="option-label">Observações</span>
+        <textarea id="customizeNotes" rows="2" placeholder="Ex: sem cebola, corte especial..."></textarea>
+      </label>
+
+      <div class="customize-footer">
+        <div class="qty-stepper">
+          <button id="qtyMinus" aria-label="Diminuir quantidade">−</button>
+          <span id="qtyValue">1</span>
+          <button id="qtyPlus" aria-label="Aumentar quantidade">+</button>
+        </div>
+        <button class="btn btn-primary btn-add" id="confirmAddBtn">
+          Adicionar · <span id="customizePrice">R$ 0,00</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="drawer-overlay" id="cartOverlay">
+  <aside class="cart-drawer" role="dialog" aria-modal="true" aria-label="Carrinho de compras">
+    <div class="drawer-head">
+      <h3>Seu pedido</h3>
+      <button class="modal-close" id="closeCart" aria-label="Fechar carrinho">✕</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-empty" id="cartEmpty">
+      <p>🍕</p>
+      <p>Seu carrinho está vazio.</p>
+      <p class="muted">Adicione uma pizza pra começar o pedido.</p>
+    </div>
+
+    <div class="cart-summary" id="cartSummary">
+      <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal">R$ 0,00</span></div>
+      <div class="summary-row"><span id="deliveryFeeLabel">Taxa de entrega (Jacutinga)</span><span id="cartDeliveryFee">R$ 0,00</span></div>
+      <div class="summary-row total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+      <button class="btn btn-primary btn-block" id="checkoutBtn">Ir para o checkout</button>
+    </div>
+  </aside>
+</div>
+
+<!-- ============ CHECKOUT MODAL ============ -->
+<div class="modal-overlay" id="checkoutOverlay">
+  <div class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+    <button class="modal-close" id="closeCheckout" aria-label="Fechar">✕</button>
+
+    <div class="checkout-steps" id="checkoutSteps">
+      <span class="step is-active" data-step="1">Dados</span>
+      <span class="step" data-step="2">Entrega</span>
+      <span class="step" data-step="3">Pagamento</span>
+      <span class="step" data-step="4">Confirmação</span>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="checkout-step is-active" data-step-panel="1">
+      <h3 id="checkoutTitle">Seus dados</h3>
+      <label>Nome completo
+        <input type="text" id="custName" placeholder="Como podemos te chamar?">
+      </label>
+      <label>Telefone / WhatsApp
+        <input type="tel" id="custPhone" placeholder="(35) 9XXXX-XXXX">
+      </label>
+      <div class="checkout-actions">
+        <button class="btn btn-primary" id="toStep2">Continuar</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="checkout-step" data-step-panel="2">
+      <h3>Endereço de entrega</h3>
+      <div id="pickupNotice" class="notice" hidden>Retirada selecionada — sem necessidade de endereço. Retire no Centro, Jacutinga - MG.</div>
+      <div id="deliveryFields">
+        <div class="form-row">
+          <label>Rua
+            <input type="text" id="custStreet" placeholder="Ex: Rua Coronel Ávila">
+          </label>
+          <label>Número
+            <input type="text" id="custNumber" placeholder="Ex: 245">
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Bairro
+            <input type="text" id="custNeighborhood" placeholder="Ex: Centro">
+          </label>
+          <label>Ponto de referência
+            <input type="text" id="custRef" placeholder="Ex: perto da praça">
+          </label>
+        </div>
+      </div>
+      <div class="checkout-actions">
+        <button class="btn btn-ghost" data-back="1">Voltar</button>
+        <button class="btn btn-primary" id="toStep3">Continuar</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="checkout-step" data-step-panel="3">
+      <h3>Forma de pagamento</h3>
+      <div class="payment-options" id="paymentOptions">
+        <button class="payment-chip" data-payment="pix">
+          <span class="payment-icon">🔗</span>
+          <span>PIX</span>
+        </button>
+        <button class="payment-chip" data-payment="cartao">
+          <span class="payment-icon">💳</span>
+          <span>Cartão na entrega</span>
+        </button>
+        <button class="payment-chip" data-payment="dinheiro">
+          <span class="payment-icon">💵</span>
+          <span>Dinheiro</span>
+        </button>
+      </div>
+      <label id="changeForField" hidden>Troco para quanto?
+        <input type="number" id="changeFor" min="0" step="0.01" placeholder="Ex: 100,00">
+      </label>
+      <div id="pixNotice" class="notice" hidden>O QR Code do PIX será gerado na etapa de confirmação.</div>
+      <div class="checkout-actions">
+        <button class="btn btn-ghost" data-back="2">Voltar</button>
+        <button class="btn btn-primary" id="toStep4">Revisar pedido</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="checkout-step" data-step-panel="4">
+      <h3>Confirme seu pedido</h3>
+      <div class="order-review" id="orderReview"></div>
+      <div id="pixBox" class="pix-box" hidden>
+        <div class="pix-qr">▦</div>
+        <p class="muted">QR Code Pix gerado — escaneie para pagar.</p>
+      </div>
+      <div class="checkout-actions">
+        <button class="btn btn-ghost" data-back="3">Voltar</button>
+        <button class="btn btn-primary" id="confirmOrderBtn">Confirmar pedido</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============ ORDER SUCCESS MODAL ============ -->
+<div class="modal-overlay" id="successOverlay">
+  <div class="modal success-modal" role="dialog" aria-modal="true">
+    <div class="success-icon">✓</div>
+    <h3>Pedido enviado!</h3>
+    <p class="muted">Seu pedido <strong id="successOrderId"></strong> foi recebido pela Papa Pizza. Acompanhe pelo WhatsApp.</p>
+    <div class="checkout-actions">
+      <a class="btn btn-primary btn-block" id="successWhatsappBtn" href="#" target="_blank" rel="noopener">Enviar resumo pelo WhatsApp</a>
+      <button class="btn btn-ghost btn-block" id="closeSuccessBtn">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
