@@ -1,0 +1,23 @@
+/* =========================================================
+   RESPONSIVO — carregado por último, sobrepõe os demais módulos
+   ========================================================= */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; }
+  .hero-banner { position: static; margin-top: 1rem; max-width: 100%; }
+  .about-grid { grid-template-columns: 1fr; }
+  .admin-shell { grid-template-columns: 1fr; }
+  .admin-sidebar { position: static; height: auto; flex-direction: row; align-items: center; overflow-x: auto; }
+  .admin-nav { flex-direction: row; }
+  .admin-exit { margin-top: 0; }
+  .stat-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .header-inner { justify-content: center; }
+  .header-actions { width: 100%; justify-content: space-between; margin-left: 0; }
+  .mode-btn { font-size: 0.72rem; padding: 0.4rem 0.6rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .payment-options { grid-template-columns: 1fr; }
+  .admin-content { padding: 1.5rem 1.2rem 3rem; }
+}

@@ -1,0 +1,67 @@
+/* =========================================================
+   PAINEL ADMINISTRATIVO
+   ========================================================= */
+.admin-shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+.admin-sidebar {
+  background: var(--graphite-800); border-right: 1px solid var(--line);
+  padding: 1.5rem 1.2rem; display: flex; flex-direction: column; gap: 2rem;
+  position: sticky; top: 0; height: 100vh;
+}
+.admin-nav { display: flex; flex-direction: column; gap: 0.3rem; flex: 1; }
+.admin-nav-btn {
+  text-align: left; border: none; background: transparent; color: var(--cream-dim);
+  padding: 0.7rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.9rem; font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.admin-nav-btn:hover { background: rgba(255,255,255,0.05); }
+.admin-nav-btn.is-active { background: var(--red-dim); color: var(--cream); font-weight: 700; }
+
+.admin-content { padding: 2rem 2.5rem 4rem; max-width: 1100px; }
+.admin-panel { display: none; }
+.admin-panel.is-active { display: block; animation: stepIn 0.2s ease; }
+.admin-content h2 { font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-bottom: 1.8rem; }
+.stat-card {
+  background: var(--graphite-800); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.4rem;
+}
+.stat-label { font-size: 0.8rem; color: var(--cream-faint); }
+.stat-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+
+.admin-card {
+  background: var(--graphite-800); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 1.5rem; margin-bottom: 1.5rem;
+}
+.admin-card h3 { font-size: 1.05rem; margin-bottom: 1rem; }
+
+.rank-list { margin: 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.rank-list li { font-size: 0.9rem; }
+.rank-list .rank-count { color: var(--gold); font-weight: 600; }
+
+.pizza-form .form-row { margin-top: 0.2rem; }
+.pizza-form button { margin-top: 1.4rem; }
+
+.table-wrap { overflow-x: auto; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.admin-table th {
+  text-align: left; padding: 0.7rem 0.8rem; color: var(--cream-faint);
+  font-weight: 600; border-bottom: 1px solid var(--line); white-space: nowrap;
+}
+.admin-table td { padding: 0.8rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.admin-table tr:last-child td { border-bottom: none; }
+
+.badge { padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700; }
+.badge.ativo, .badge.ok, .badge.concluido { background: rgba(63,178,127,0.16); color: var(--green-ok); }
+.badge.inativo, .badge.pendente { background: var(--gold-dim); color: var(--gold); }
+.badge.preparo { background: rgba(211,47,47,0.16); color: var(--red-bright); }
+.badge.entrega { background: rgba(52,152,219,0.16); color: #5dade2; }
+
+.status-select { padding: 0.4rem 0.6rem; font-size: 0.78rem; margin: 0; }
+
+.icon-link-btn { border: none; background: none; color: var(--cream-faint); font-size: 0.78rem; text-decoration: underline; }
+.icon-link-btn:hover { color: var(--red-bright); }
+
+.empty-orders { text-align: center; padding: 1rem 0 0; }
+
+.admin-exit { margin-top: auto; }

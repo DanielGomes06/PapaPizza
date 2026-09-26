@@ -1,0 +1,133 @@
+/* =========================================================
+   MODAIS — base compartilhada + customização + checkout + sucesso
+   ========================================================= */
+
+/* ---------- Base (glassmorphism) ---------- */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.is-open { display: flex; }
+
+.modal {
+  background: var(--graphite-800);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  max-width: 480px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  animation: modalIn 0.25s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes modalIn { from { opacity: 0; transform: scale(0.94) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+.modal-close {
+  position: absolute; top: 0.9rem; right: 0.9rem; z-index: 5;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: none; background: rgba(0,0,0,0.4); color: var(--cream);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Campos de formulário usados em vários modais */
+textarea, input, select {
+  width: 100%;
+  background: var(--graphite-700);
+  border: 1px solid var(--line);
+  color: var(--cream);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+}
+textarea:focus, input:focus, select:focus { border-color: var(--gold); }
+label { display: block; font-size: 0.82rem; color: var(--cream-dim); font-weight: 500; margin-top: 0.9rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+/* ---------- Customização de pizza ---------- */
+.customize-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.customize-body { padding: 1.4rem 1.5rem 1.6rem; }
+.customize-body h3 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+
+.option-group { display: block; margin-top: 1.2rem; }
+.option-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+.option-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.chip {
+  border: 1px solid var(--line); background: var(--graphite-700); color: var(--cream);
+  padding: 0.55rem 0.9rem; border-radius: var(--radius-sm); font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+.chip small { color: var(--cream-faint); }
+.chip.is-active { background: var(--red-dim); border-color: var(--red-bright); color: var(--cream); }
+.chip.is-active small { color: var(--gold); }
+
+.customize-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1.5rem; gap: 1rem; flex-wrap: wrap;
+}
+.qty-stepper {
+  display: flex; align-items: center; gap: 0.9rem;
+  background: var(--graphite-700); border-radius: 999px; padding: 0.4rem 0.9rem;
+}
+.qty-stepper button { border: none; background: none; color: var(--cream); font-size: 1.1rem; font-weight: 700; }
+.btn-add { flex: 1; min-width: 180px; }
+
+/* ---------- Checkout (wizard de 4 etapas) ---------- */
+.checkout-modal { max-width: 460px; padding: 1.6rem 1.6rem 1.8rem; }
+.checkout-steps { display: flex; gap: 0.4rem; margin-bottom: 1.5rem; }
+.step {
+  flex: 1; text-align: center; font-size: 0.72rem; font-weight: 600;
+  color: var(--cream-faint); padding-bottom: 0.6rem; border-bottom: 2px solid var(--line);
+}
+.step.is-active { color: var(--gold); border-color: var(--gold); }
+.step.is-done { color: var(--green-ok); border-color: var(--green-ok); }
+
+.checkout-step { display: none; }
+.checkout-step.is-active { display: block; animation: stepIn 0.2s ease; }
+@keyframes stepIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+.checkout-step h3 { margin-bottom: 0.4rem; }
+
+.checkout-actions { display: flex; gap: 0.8rem; margin-top: 1.6rem; }
+.checkout-actions .btn { flex: 1; }
+
+.notice {
+  background: var(--gold-dim); color: var(--gold); border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem; font-size: 0.82rem; margin-top: 0.9rem;
+}
+
+.payment-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-top: 0.8rem; }
+.payment-chip {
+  border: 1px solid var(--line); background: var(--graphite-700); color: var(--cream);
+  border-radius: var(--radius-md); padding: 1rem 0.5rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 600; transition: all 0.15s ease;
+}
+.payment-chip .payment-icon { font-size: 1.3rem; }
+.payment-chip.is-active { background: var(--red-dim); border-color: var(--red-bright); }
+
+.order-review { background: var(--graphite-700); border-radius: var(--radius-md); padding: 1rem 1.1rem; font-size: 0.85rem; }
+.order-review .review-line { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px dashed var(--line); }
+.order-review .review-line:last-child { border-bottom: none; }
+.order-review .review-total { font-weight: 700; color: var(--gold); font-size: 1rem; margin-top: 0.4rem; }
+
+.pix-box { text-align: center; margin-top: 1.2rem; padding: 1.2rem; background: var(--graphite-700); border-radius: var(--radius-md); }
+.pix-qr {
+  width: 140px; height: 140px; margin: 0 auto 0.8rem;
+  background: white; color: var(--graphite-900);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; border-radius: var(--radius-sm);
+}
+
+/* ---------- Confirmação de pedido ---------- */
+.success-modal { text-align: center; padding: 2.4rem 1.8rem; max-width: 400px; }
+.success-icon {
+  width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 1.2rem;
+  background: var(--green-ok); color: white; font-size: 1.6rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.success-modal h3 { margin-bottom: 0.6rem; }
+.success-modal .checkout-actions { flex-direction: column; }

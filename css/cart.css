@@ -1,0 +1,48 @@
+/* =========================================================
+   CARRINHO LATERAL (drawer)
+   ========================================================= */
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+  justify-content: flex-end;
+  padding: 0;
+}
+.drawer-overlay.is-open { display: flex; }
+
+.cart-drawer {
+  background: var(--graphite-800);
+  width: min(420px, 100%);
+  height: 100%;
+  display: flex; flex-direction: column;
+  border-left: 1px solid var(--line);
+  animation: drawerIn 0.25s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes drawerIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.drawer-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--line);
+}
+.drawer-head .modal-close { position: static; background: transparent; }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.4rem; display: flex; flex-direction: column; gap: 0.9rem; }
+.cart-item {
+  display: flex; gap: 0.8rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--line);
+  animation: itemIn 0.2s ease;
+}
+@keyframes itemIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.cart-item img { width: 62px; height: 62px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; }
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-info h4 { margin: 0 0 0.2rem; font-size: 0.92rem; }
+.cart-item-meta { font-size: 0.76rem; color: var(--cream-faint); margin: 0 0 0.3rem; }
+.cart-item-row { display: flex; align-items: center; justify-content: space-between; }
+.cart-item-price { font-weight: 700; color: var(--gold); font-size: 0.88rem; }
+.cart-item-remove { border: none; background: none; color: var(--cream-faint); font-size: 0.78rem; text-decoration: underline; padding: 0; }
+
+.cart-empty { display: none; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem; color: var(--cream-faint); text-align: center; padding: 2rem; }
+.cart-empty p:first-child { font-size: 2.4rem; margin: 0; }
+
+.cart-summary { border-top: 1px solid var(--line); padding: 1.2rem 1.4rem 1.5rem; }
+.summary-row { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 0.5rem; color: var(--cream-dim); }
+.summary-row.total { font-size: 1.05rem; font-weight: 700; color: var(--cream); margin: 0.8rem 0 1rem; }

@@ -1,0 +1,36 @@
+/* =========================================================
+   DESIGN TOKENS
+   Fonte única de verdade para cores, tipografia e espaçamento.
+   Qualquer mudança de identidade visual começa aqui.
+   ========================================================= */
+:root {
+  --graphite-900: #121212;
+  --graphite-800: #1e1e1e;
+  --graphite-700: #262626;
+  --graphite-600: #333333;
+  --line: rgba(255, 255, 255, 0.08);
+
+  --cream: #fbf9f5;
+  --cream-dim: rgba(251, 249, 245, 0.72);
+  --cream-faint: rgba(251, 249, 245, 0.48);
+
+  --red: #c0392b;
+  --red-bright: #d32f2f;
+  --red-dim: rgba(211, 47, 47, 0.16);
+
+  --gold: #f1c40f;
+  --gold-deep: #f39c12;
+  --gold-dim: rgba(241, 196, 15, 0.16);
+
+  --green-ok: #3fb27f;
+
+  --radius-lg: 1.25rem;
+  --radius-md: 0.9rem;
+  --radius-sm: 0.6rem;
+
+  --shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-tight: 0 4px 14px rgba(0, 0, 0, 0.3);
+
+  --font-display: "Poppins", "Inter", sans-serif;
+  --font-body: "Inter", "Poppins", sans-serif;
+}
