@@ -1,0 +1,81 @@
+name: CI/CD - Papa Pizza
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: papa-pizza
+  # Aceita DOCKER_USER tanto como "Variable" (slide 3) quanto como "Secret" (YAML dos slides)
+  DOCKER_USER: ${{ vars.DOCKER_USER || secrets.DOCKER_USER }}
+
+jobs:
+  # ---------------------------------------------------------------
+  # 1) Qualidade: confere estrutura do projeto e lint do Dockerfile
+  # ---------------------------------------------------------------
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Conferir arquivos obrigatórios
+        run: |
+          for f in index.html Dockerfile tests/test_site.py; do
+            test -f "$f" || { echo "::error::Arquivo obrigatório ausente: $f"; exit 1; }
+          done
+
+      - name: Lint do Dockerfile (hadolint)
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: error
+
+  # ---------------------------------------------------------------
+  # 2) Build: constrói a imagem e envia ao Docker Hub
+  # ---------------------------------------------------------------
+  build:
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # O "Login" é necessário para enviar a imagem para o Docker Hub
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      # Aqui o Docker copia o site e configura o ambiente sozinho
+      - name: Build e Push da Imagem
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+  # ---------------------------------------------------------------
+  # 3) Test: roda os testes DENTRO do container (paridade com produção)
+  # ---------------------------------------------------------------
+  test:
+    needs: build
+    runs-on: ubuntu-latest # Não precisa mais de Windows/Mac, o Docker isola o SO
+    steps:
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      # Em vez de setup de ambiente, você apenas "chama" a imagem pronta.
+      # A imagem é Python (não Node), então o comando é unittest e não "npm test".
+      - name: Rodar testes dentro do Container
+        run: >
+          docker run --rm
+          ${{ env.DOCKER_USER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          python -m unittest discover -s tests -v
