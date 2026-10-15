@@ -1,0 +1,18 @@
+services:
+  container1:
+    image: alpine
+    container_name: container1
+    command: sleep infinity
+    networks:
+      - rede-teste
+
+  container2:
+    image: alpine
+    container_name: container2
+    command: sleep infinity
+    networks:
+      - rede-teste
+
+networks:
+  rede-teste:
+    driver: bridge
